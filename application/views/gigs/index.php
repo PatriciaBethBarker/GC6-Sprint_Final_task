@@ -15,23 +15,16 @@
 * @see Gig.php
 * @todo none
 */
-
-   $this->load->view($this->config->item('theme') . 'header');
 ?>
 
-<?php
 
-echo '
+<h1>Gigs List</h1>
+<h2><strong>Gig Opportunity</strong></h2>
 
-    <h1>Gigs List</h1>
+<?php foreach ($gigs as $gig): ?>
+<h3><?php echo $gig['CompanyName'] ?></h3>
+<p><?php echo $gig['City'] ?></p>
+<p><?php echo $gig['GigOutline'] ?></p>
+<p><?php echo anchor('gigs/'.$gig['GigID'] , 'Read More');?></p>
 
-
-<div>
-    <h2><strong>Gig Opportunity</strong></h2>
-
-    
-</div>
-';
-
-    $this->load->view($this->config->item('theme') . 'footer');
-?>
+<?php endforeach ?>

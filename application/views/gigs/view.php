@@ -14,21 +14,9 @@
 * @see view.php
 * @todo none
 */
-
-   $this->load->view($this->config->item('theme') . 'header');
 ?>
-
-<?php
-
-echo '
 
 <div class="container">
-  <div>
-    <h1>This is where we will see the posted Gig</h1>
-
-    </div>
+    <h2><?php echo $gig['CompanyName']; ?></h2>
+    <p><?php echo $gig['GigOutline']; ?></p>
 </div>
-';
-
-    $this->load->view($this->config->item('theme') . 'footer');
-?>

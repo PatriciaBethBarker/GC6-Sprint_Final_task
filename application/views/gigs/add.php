@@ -14,15 +14,13 @@
 * @see Gig.php
 * @todo none
 */
-   $this->load->view($this->config->item('theme') . 'header');
 ?>
 
-<?php
-echo '
 <div class="container">
   <div class="col-lg-10">
     <h1>Gigs Form</h1>
-        <form class="form-horizontal" role="form" method="post" action="view">
+      <?php echo validation_errors(); ?>
+        <form class="form-horizontal" role="form" method="post" action="add">
         <fieldset>
             <div class="form-group">
                 <legend><h2><strong>Company Information</strong></h2></legend>
@@ -94,7 +92,7 @@ echo '
             <div class="form-group">
                 <label for="Email" class="col-lg-3 control-label"><em>Email</em></label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" id="Email" placeholder="Gig Contact Email">
+                        <input type="text" class="form-control" id="Email" name="Email" placeholder="Gig Contact Email">
                     </div>
             </div>
             <div class="form-group">
@@ -163,13 +161,8 @@ echo '
             </div>
                 </fieldset>
         <br>
-                     </div>
-            </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-default">Submit</button>
         </fieldset>
         </form>
     </div>
 </div>
-';
-    $this->load->view($this->config->item('theme') . 'footer');
-?>

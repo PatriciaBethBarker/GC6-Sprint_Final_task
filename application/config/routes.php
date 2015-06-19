@@ -1,6 +1,4 @@
 <?php
-//config/routes.php
-
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
@@ -58,25 +56,25 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 */
 
-$route['rss'] = 'rss';
-$route['rss/(:any)'] = 'rss/$1';
-$route['feed'] = 'feed';
-
-$route['news/create'] = 'news/create';
-$route['news/(:any)'] = 'news/view/$1';
-$route['news'] = 'news';
-
+//gig routes 
 $route['gigs'] = 'gig/index';
-$route['gigs/view/(:any)'] = 'gig/view/$1';
 $route['gigs/add'] = 'gig/add';
+$route['gigs/(:any)'] = 'gig/view/$1';
 
-//$route['customer'] = 'customer';
+//other page routes
+$route['customer'] = 'customer';
 $route['customers'] = 'customer';
-$route['customer/(:any)'] = 'customer/view/$1';
-
-$route['(:any)'] = 'pages/view/$1';
-$route['default_controller'] = 'pages/view';  //switch back to this if not 80
+$route['startups'] = 'startups';
+$route['profile_form'] = 'profile_form';
+$route['profiles'] = 'profile_list';
 
 //bootswatch example route
 $route['example'] = 'customer/example';
-//$route['default_controller'] = 'customer';  //switch out if not 76
+
+$route['profile/(:any)'] = 'profile/view/$1';
+$route['(:any)'] = 'pages/$1';
+$route['404_override'] = 'my404';
+
+
+//homepage routes
+$route['default_controller'] = 'welcome';

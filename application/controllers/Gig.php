@@ -34,67 +34,63 @@ class Gig extends CI_Controller
   * @return void
   * @todo none
   */
-        public function __construct()
-        {//begin constructor
+    public function __construct()
+    {//begin constructor
+        parent::__construct();
+        $this->load->model('gig_model');
+        $this->config->set_item('banner', 'Global News Banner');
+    }#end constructor
 
-                parent::__construct();
+    public function index()
+    {//begin function index
+        $data['gigs'] = $this->gig_model->get_gigs();
+        $data['title']= 'Gigs';
+        
+        $this->load->view($this->config->item('theme') . 'header');
+        $this->load->view('gigs/index', $data);
+        $this->load->view($this->config->item('theme') . 'footer');
+    }#end function index
 
-                $this->load->model('gig_model');
-
-                $this->config->set_item('banner', 'Global News Banner');
-
-        }#end constructor
-
-        public function index()
-        {//begin function index
-                //$data['query'] = $this->gig_model->get_customers();//check this
-                $this->config->set_item("title", "gigs");
-                $data['query'] = $this->gig_model->get_gigs();//check this
-                $data['title']= 'Gig';
-
-                $this->load->view('gigs/index', $data);
-        }#end function index
-
-        public function view($slug = NULL)
-{//begin function index
-        //$data['query'] = $this->gig_model->get_customers();//check this
-        $data['gigs'] = $this->gig_model->get_gigs($slug);//check this
-
+    public function view($slug = NULL)
+    {//begin function index
+        $data['gig'] = $this->gig_model->get_gigs($slug);
         if (empty($data['gig']))
         {
                 show_404();
         }
+        $data['title']= 'Gig';
+        
+        $this->load->view($this->config->item('theme') . 'header');
+        $this->load->view('gigs/view', $data);
+        $this->load->view($this->config->item('theme') . 'footer');
+    }#end function index
 
-        $data['title']= $data['Gig']['title'];
-        $this->load->view('gigs/view', data);
-}#end function index
-
-
-public function add()
-{
+    public function add()
+    {
         $this->load->helper('form');
         $this->load->library('form_validation');
-
         $data['title'] = 'Add a new gig';
 
-$this->form_validation->set_rules('CompanyName', 'Company Name', 'required');
-$this->form_validation->set_rules('Email', 'Email', 'required');
+        $this->form_validation->set_rules('CompanyName', 'Company Name', 'required');
+        $this->form_validation->set_rules('Email', 'Email', 'required');
 
-if ($this->form_validation->run() === FALSE)
-{//create form to add gigs
-$this->config->set_item('title', 'Gig');
-$this->load->view('gigs/add'); //rename view folder gigs/add  add.php is the view
-}
-else
-{//this processes
-       // echo "blah"; die;
-    $this->gig_model->add_gig();
-    $this->load->view('templates/header', $data);
-    $this->load->view('gigs/view');
-    $this->load->view('templates/footer');
-}   
-
-        }#end function addForm()
+        if ($this->form_validation->run() === FALSE)
+        {//create form to add gigs
+            $this->load->view($this->config->item('theme') . 'header');
+            $this->load->view('gigs/add', $data); 
+            $this->load->view($this->config->item('theme') . 'footer');
+        }
+        else
+        {//this processes
+            $data['gigs'] = $this->gig_model->get_gigs();
+            $data['title']= 'Gigs';
+            $this->gig_model->add_gig();
+            
+            $this->load->view($this->config->item('theme') . 'header');
+            $this->load->view('gigs/index', $data);
+            $this->load->view($this->config->item('theme') . 'footer');
+        }
+    }#end function addForm()
 
 
 
